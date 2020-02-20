@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import './RETRO-bootstrap.css'
-import BitMiner from './BitMiner';
+import Mine from "./BitMiner";
 function App() {
   return (
-    <BitMiner />
+    <Mine />
   );
 }
 export default App;
