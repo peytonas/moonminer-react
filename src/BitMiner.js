@@ -14,7 +14,7 @@ class Mine extends React.Component {
     this.state = {
       bitCoins: 0,
       clickBonus: 1,
-      cps: 1,
+      bcps: 0,
     }
   }
   mine() {
@@ -23,13 +23,29 @@ class Mine extends React.Component {
     })
   }
   render() {
-    let status;
-    status = this.state.bitCoins
+    let bc;
+    let cb;
+    let bcps
+    bc = this.state.bitCoins
+    cb = this.state.clickBonus
+    bcps = this.state.bcps
     return (
       <div className="row justify-content-center bg-dark">
         <div className="col-3 text-center">
+          <button className="btn btn-danger">
+            <p>Buy</p>
+          </button>
+        </div>
+        <div className="col-3 text-center">
           <Bit onClick={this.mine.bind(this)} />
-          <div className="text-primary">{status}</div>
+          <div className="text-primary">BitCoins: {bc}</div>
+          <div className="text-primary">Click Bonus: {cb}</div>
+          <div className="text-primary">BCPS: {bcps}</div>
+        </div>
+        <div className="col-3 text-center">
+          <button className="btn btn-warning">
+            <p>Buy</p>
+          </button>
         </div>
       </div>
     )
