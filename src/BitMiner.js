@@ -5,8 +5,10 @@ import './RETRO-bootstrap.css'
 
 function Bit(props) {
   return (
-    <img src={logo} className="App-logo ml-n5" alt="logo" onClick={props.onClick} />
+    <i className="fab fa-bitcoin App-logo ml-n2 text-primary fa-6x" onClick={props.onClick}></i>
   )
+}
+class Count extends React.Component {
 }
 class Mine extends React.Component {
   constructor(props) {
@@ -30,26 +32,33 @@ class Mine extends React.Component {
     cb = this.state.clickBonus
     bcps = this.state.bcps
     return (
-      <div className="row justify-content-center bg-dark">
-        <div className="col-3 text-center">
-          <button className="btn btn-danger">
-            <p>Buy</p>
-          </button>
+      <div className="container-fluid bg-dark">
+        <div className="row justify-content-center">
+          <div className="col-12 text-primary text-center">
+            <h1>BitMiner</h1>
+          </div>
         </div>
-        <div className="col-3 text-center">
-          <Bit onClick={this.mine.bind(this)} />
-          <div className="text-primary">BitCoins: {bc}</div>
-          <div className="text-primary">Click Bonus: {cb}</div>
-          <div className="text-primary">BCPS: {bcps}</div>
-        </div>
-        <div className="col-3 text-center">
-          <button className="btn btn-warning">
-            <p>Buy</p>
-          </button>
+        <div className="row justify-content-center align-items-center">
+          <div className="col-4 text-center">
+            <button className="btn btn-danger">
+              Buy
+            </button>
+            <button className="btn btn-warning ml-2">
+              Buy
+            </button>
+          </div>
+          <div className="col-4 text-center">
+            <Bit onClick={this.mine.bind(this)} />
+            <div className="text-primary">BitCoins: {bc}</div>
+            <div className="text-primary">Click Bonus: {cb}</div>
+            <div className="text-primary">BCPS: {bcps}</div>
+          </div>
+          <div className="col-4 text-center text-secondary">
+            test
+          </div>
         </div>
       </div>
     )
   }
 }
-
 export default Mine
