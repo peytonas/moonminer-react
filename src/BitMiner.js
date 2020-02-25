@@ -61,13 +61,14 @@ class Mine extends React.Component {
     }
   }
   mine() {
+    let clickBonus = this.state.clickBonus;
     for (var key in this.purchasables) {
       if (this.purchasables[key].purchased > 0) {
-        this.state.bitCoins += (this.purchasables[key].purchased * this.purchasables[key].multiplier)
+        clickBonus += (this.purchasables[key].purchased * this.purchasables[key].multiplier)
       }
     }
     this.setState({
-      bitCoins: this.state.bitCoins + 1
+      bitCoins: this.state.bitCoins + clickBonus
     })
   }
   render() {
