@@ -12,8 +12,21 @@ class BitCoinCount extends React.Component {
     return (
       <div className="row justify-content-center">
         <div className="col-12">
-          <h3 id="bc">
+          <h3 id="bcc">
             BitCoins: {this.props.bc}
+          </h3>
+        </div>
+      </div>
+    )
+  }
+}
+class VisitorCount extends React.Component {
+  render() {
+    return (
+      <div className="row justify-content-center">
+        <div className="col-12">
+          <h3 id="vc">
+            Visitors: {this.props.vc}
           </h3>
         </div>
       </div>
@@ -25,7 +38,7 @@ class AutoMinerCount extends React.Component {
     return (
       <div className="row justify-content-center">
         <div className="col-12">
-          <h3 id="bc">
+          <h3 id="amc">
             AutoMiners: {this.props.amc}
           </h3>
         </div>
@@ -41,21 +54,21 @@ class Mine extends React.Component {
       visitors: 0,
       autoMiners: 0,
       clickBonus: 1,
-      bcps: 0
+      bitCoinsPerSecond: 0
     }
     this.purchasables = {
       visitors: {
         price: 50,
-        purchased: 5,
+        purchased: 0,
         automatic: false,
-        multiplier: 1,
+        multiplier: 5,
         coolDown: 5000
       },
       autoMiner: {
         price: 500,
         purchased: 0,
         automatic: true,
-        multiplier: 0,
+        multiplier: 20,
         coolDown: 30000
       }
     }
@@ -71,11 +84,38 @@ class Mine extends React.Component {
       bitCoins: this.state.bitCoins + clickBonus
     })
   }
+  buyVisitor() {
+    this.setState({
+      visitors: this.state.visitors + 1,
+      clickBonus: (this.state.visitors * this.purchasables.visitors.multiplier) + 1
+    })
+  }
+  buyAutoMiner() {
+    this.setState({
+      autoMiners: this.state.autoMiners + 1,
+      bitCoinsPerSecond: this.state.autoMiners * this.purchasables.autoMiner.multiplier
+    })
+  }
+  // runAutoMiner() {
+  //   console.log("mining");
+  //   let bc = this.state.bitCoins
+  //   let bcps = 0;
+  //   for (var key in this.purchasables) {
+  //     bcps = this.purchasables[key].multiplier * this.purchasables[key].purchased
+  //     if (this.purchasables[key].automatic) {
+  //       bc += bcps
+  //     }
+  //   }
+  //   this.setState({
+  //     bitCoins: this.state.bitCoins + bc,
+  //   })
+  //   console.log(this.state.bitCoinsPerSecond);
+  // }
   render() {
     let cb;
     let bcps;
     cb = this.state.clickBonus
-    bcps = this.state.bcps
+    bcps = this.state.bitCoinsPerSecond
     return (
       <div className="container-fluid bg-dark">
         <div className="row justify-content-center">
@@ -85,10 +125,10 @@ class Mine extends React.Component {
         </div>
         <div className="row justify-content-center align-items-center">
           <div className="col-4 text-center">
-            <button className="btn btn-danger">
+            <button className="btn btn-danger" onClick={this.buyAutoMiner.bind(this)}>
               Buy Autominer
             </button>
-            <button className="btn btn-warning ml-2">
+            <button className="btn btn-warning ml-2" onClick={this.buyVisitor.bind(this)}>
               Buy Visitor
             </button>
           </div>
@@ -104,6 +144,7 @@ class Mine extends React.Component {
                   INVENTORY
                 </div>
                 <BitCoinCount bc={this.state.bitCoins} />
+                <VisitorCount vc={this.state.visitors} />
                 <AutoMinerCount amc={this.state.autoMiners} />
               </div>
             </div>
